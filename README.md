@@ -10,7 +10,7 @@ You will be able to start the quiz by simply clicking the 'Start Quiz' button on
 
 ## Link to the Deployed Application
 
-[Riddle Me Quiz](//URL//)
+[Riddle Me Quiz](https://forester93.github.io/riddle-me-quiz/)
 
 ## Link to the Github Repository
 
@@ -38,3 +38,10 @@ You will be able to start the quiz by simply clicking the 'Start Quiz' button on
 • Basic Styling of the application in CSS.
 • Updating README.md
 • Adding the question bank in the script.js file.
+
+### Third Commit
+
+• Added basic functionality to the JavaScript file. (Next Question, show and hide buttons, import questions from question bank)
+• Linked the radio buttons together.
+• Enhanced the display of some of the elements.
+• Added comments to the css file.
