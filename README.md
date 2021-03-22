@@ -45,3 +45,11 @@ You will be able to start the quiz by simply clicking the 'Start Quiz' button on
 • Linked the radio buttons together.
 • Enhanced the display of some of the elements.
 • Added comments to the css file.
+
+### Fourth Commit
+
+• Added grading functionality to the code.
+• Added saving scores functionality to the code.
+• Added retrieving scores functionality to the code.
+• Added reset score functionality to the code.
+• Added screenshot of the assets.
