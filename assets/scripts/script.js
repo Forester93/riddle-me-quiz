@@ -250,7 +250,6 @@ resetScoreButton.addEventListener('click',function(event){
 });
 
 //Start Over
-
 startOverButton.addEventListener('click',function(event){
     location.reload();
 });
