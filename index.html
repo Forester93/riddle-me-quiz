@@ -20,31 +20,33 @@
     <section id='quiz-app'>
         <button id='start-quiz'>Start Quiz</button>
             <form id='mcq'>
-                        <p id='question'>Question</p>
-                        <label class='choice-container' id='answer1'><p id='answer1text'>Answer 1</p>
+                        <!-- question text -->
+                        <p id='question'></p>
+                        <!-- answer texts -->
+                        <label class='choice-container' id='answer1'><p id='answer1text'></p>
                             <input class='choice' type="radio" id="choice1" name='choiceanswers' checked=true value="0">
                             <span class="checkmark"></span>
                         </label>
-                        <label class='choice-container' id='answer2'><p id='answer2text'>Answer 2</p>
+                        <label class='choice-container' id='answer2'><p id='answer2text'></p>
                         <input class='choice' type="radio" id="choice2" name='choiceanswers' value="1">
                         <span class="checkmark"></span>
                         </label>
-                        <label class='choice-container' id='answer3'><p id='answer3text'>Answer 3</p>
+                        <label class='choice-container' id='answer3'><p id='answer3text'></p>
                         <input class='choice' type="radio" id="choice3" name='choiceanswers' value="2">
                         <span class="checkmark"></span>
                         </label>
-                        <label class='choice-container' id='answer4'><p id='answer4text'>Answer 4</p>
+                        <label class='choice-container' id='answer4'><p id='answer4text'></p>
                         <input class='choice' type="radio" id="choice4" name='choiceanswers' value="3">
                         <span class="checkmark"></span>
                         </label>
+                        <!-- next question -->
                         <button id='next-question'>Next Question</button>
                         <p id='score'></p>
-                        <p id='timer'></p>
                         <button id='save-score' style='display:none'>Save Score</button>
                         <table id='high-scores'>
                             <tr>
                                 <th>
-                                    High Scores
+                                    Scores
                                 </th>
                             </tr>
                             <tr>
@@ -53,11 +55,14 @@
                               <th>Date</th>
                             </tr>
                           </table>
-                        <button id='reset-score' style='display:none'>Reset Score</button>
-
+                        <button id='reset-score' style='display:none'>Reset Scores</button>
             </form>
+            <button id='start-over' style='display:none'>Start Over</button>
     </section>
-    
+    <section id='timer'>
+        <p id='time'></p>
+        <br>seconds remaining...
+    </section>
     <script src="./assets/scripts/script.js"></script> 
 </body>
 </html>

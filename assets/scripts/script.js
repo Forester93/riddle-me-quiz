@@ -32,6 +32,7 @@ let scores=[];
 let currentInitials='';
 let currentScore=0;
 let grade='';
+let remainingTime=12*questionsBank.length;
 
 // get buttons and form
 let startButton=document.getElementById('start-quiz');
@@ -40,6 +41,9 @@ let saveScoreButton=document.getElementById('save-score');
 let resetScoreButton=document.getElementById('reset-score');
 let questionSection=document.getElementById('mcq');
 let scoresTable=document.getElementById('high-scores');
+let startOverButton=document.getElementById('start-over');
+let timerBlock=document.getElementById('timer');
+let timerText=document.getElementById('time');
 //create objects for question and answer texts
 let questionText=document.getElementById('question')
 let textAnswer1=document.getElementById('answer1text');
@@ -76,33 +80,53 @@ function nextQuestion(){
     currentCorrectAnswer=questionsBank[questionIndex].answerIndex;
 }
 
+// Timer function
+function startTimer(){
+
+
+    timerText.textContent=parseInt(remainingTime);
+    let countDown=setInterval(function(){
+        timerText.textContent=parseInt(remainingTime);
+        if (remainingTime<1){
+            clearInterval(countDown);
+            gradeMe();
+            timerBlock.innerHTML='Time\'s Up!';
+            return;
+        }
+        remainingTime--;
+
+    },1000);
+
+
+}
 // Start Quiz function
 
 function startQuiz(){
     //hide this
-    this.style.display="none";
+    startButton.style.display="none";
     // Make the quiz form visible
     questionSection.style.display='block';
     nextQuestion();
+    //Show timer
+    timerBlock.style.display='initial';
     //Start timer
-
-
+    startTimer();
 }
 
 // Get scores function
 
 function getScores(){
 
-    if(localStorage.getItem('riddleMeQuizScores')!=null){
-    scores = JSON.parse(localStorage.getItem('riddleMeQuizScores'))
+
+    if(localStorage.getItem('riddleMeQuizScores')!=null&&localStorage.getItem('riddleMeQuizScores')!=''){
+    scores = JSON.parse(localStorage.getItem('riddleMeQuizScores'));
     }else{
         scores=[];
     }
     //Initialise table
-    scoresTable.innerHTML="<tr><th>High Scores</th></tr><tr><th>Initials</th><th>Score</th><th>Date</th></tr>"
+    scoresTable.innerHTML="<tr><th>Scores</th></tr><tr><th>Initials</th><th>Score</th><th>Date</th></tr>"
 
-    // scores=[['MF','100%','21/12/2020'],['MF','80%','11/11/2020'],['MF','60%','10/10/2020']];
-    if(scores!=[]){
+    if(scores.length){
         for(let item in scores){
             //display scores in the table
             let newTableRow=document.createElement('tr');
@@ -136,31 +160,32 @@ function saveScores(event){
     if(scores.length!=0){
     scores.unshift([currentInitials,grade,today]);
     }else{
-        scores=[currentInitials,grade,today];
+        scores=[[currentInitials,grade,today]];
     }
     localStorage.setItem('riddleMeQuizScores',JSON.stringify(scores));
     getScores();
     scoresTable.style.display='block';
     saveScoreButton.style.display='none';
     resetScoreButton.style.display='block';
+    startOverButton.style.display='block';
 }
 
-// Evaluate Question
+// Evaluate Answer to the question
 
 function gradeQuestion(){
     let currentAnswerIndex=-1;
     let choiceAnswers=document.getElementsByName('choiceanswers');
+    // check which answer was selected
     for (let i=0; i<4; i++){
-        // alert(choiceAnswers[i].checked);
         if (choiceAnswers[i].checked){
             currentAnswerIndex=i;
-            // alert (currentAnswerIndex+' is your answer');
         }
     }
     if (currentAnswerIndex==currentCorrectAnswer) {
         score++;
-    } else {
+    } else{
         // reduceTime();
+        remainingTime -=4;
     }
 
 }
@@ -169,6 +194,9 @@ function gradeQuestion(){
 // Evaluate Total Score
 function gradeMe(){
 
+    //stop timer
+    remainingTime=0;
+    //calculate grade
     grade=score/questionsBank.length;
     grade=(grade*100)+'%'
     document.getElementById('score').textContent='Your grade is ' + grade;
@@ -178,7 +206,7 @@ function gradeMe(){
     /*hide other quiz elements*/
     for (let element in document.getElementById('mcq').children){
         if (!(document.getElementById('mcq').children[element].id=='save-score'||document.getElementById('mcq').children[element].id=='score')){
-            document.getElementById('mcq').children[element].style.display='none';
+            document.getElementById('mcq').children.item(element).style.display='none';
 
         }
     }
@@ -219,4 +247,10 @@ resetScoreButton.addEventListener('click',function(event){
     scores=[];
     localStorage.setItem('riddleMeQuizScores',[]);
     getScores();
+});
+
+//Start Over
+
+startOverButton.addEventListener('click',function(event){
+    location.reload();
 });

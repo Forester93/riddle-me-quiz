@@ -78,7 +78,6 @@ form * {
 
 /*hide score, high scores and timer button */
 #score,
-#timer,
 #high-scores {
   display: none;
 }
@@ -169,4 +168,19 @@ button:hover {
   height: 8px;
   border-radius: 50%;
   background: white;
+}
+
+/*Styling the timer*/
+#timer {
+  font-family: "Times New Roman", Times, serif, Geneva, Verdana, sans-serif;
+  font-size: 150%;
+  position: fixed;
+  display: none;
+  top: 50%;
+  left: 5%;
+  background-color: black;
+  color: whitesmoke;
+  width: fit-content;
+  height: fit-content;
+  text-align: center;
 }
