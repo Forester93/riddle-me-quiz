@@ -50,6 +50,7 @@ let textAnswer1=document.getElementById('answer1text');
 let textAnswer2=document.getElementById('answer2text');
 let textAnswer3=document.getElementById('answer3text');
 let textAnswer4=document.getElementById('answer4text');
+let choice1=document.getElementById('choice1');
 //////////////////////////////////////////////
 // Global Variables
 let questionIndex=-1;
@@ -69,6 +70,8 @@ function nextQuestion(){
         nextQuestionButton.textContent='Submit';
     }
 
+    //next question
+
     questionIndex++;
 
     // Update questions and answers on the form
@@ -78,6 +81,8 @@ function nextQuestion(){
     textAnswer3.textContent=questionsBank[questionIndex].choices[2];
     textAnswer4.textContent=questionsBank[questionIndex].choices[3];
     currentCorrectAnswer=questionsBank[questionIndex].answerIndex;
+    //reset choice
+    choice1.checked=true;
 }
 
 // Timer function
@@ -86,6 +91,7 @@ function startTimer(){
 
     timerText.textContent=parseInt(remainingTime);
     let countDown=setInterval(function(){
+        remainingTime--;
         timerText.textContent=parseInt(remainingTime);
         if (remainingTime<1){
             clearInterval(countDown);
@@ -93,7 +99,6 @@ function startTimer(){
             timerBlock.innerHTML='Time\'s Up!';
             return;
         }
-        remainingTime--;
 
     },1000);
 
@@ -117,7 +122,7 @@ function startQuiz(){
 
 function getScores(){
 
-
+    //Retrieve data from the local storage
     if(localStorage.getItem('riddleMeQuizScores')!=null&&localStorage.getItem('riddleMeQuizScores')!=''){
     scores = JSON.parse(localStorage.getItem('riddleMeQuizScores'));
     }else{
@@ -149,7 +154,7 @@ function saveScores(event){
     event.preventDefault();
     event.stopPropagation();
     //Error handling on not entering anything inside the initials
-    while(currentInitials.trim()==''||!isNaN(currentInitials.trim())){
+    while(currentInitials.trim()==''||!isNaN(currentInitials.trim())||currentInitials.trim().length>2){
         currentInitials=prompt('Please enter your initials:');
     }
     getScores();
@@ -185,7 +190,7 @@ function gradeQuestion(){
         score++;
     } else{
         // reduceTime();
-        remainingTime -=4;
+        remainingTime -=5;
     }
 
 }
@@ -195,7 +200,10 @@ function gradeQuestion(){
 function gradeMe(){
 
     //stop timer
+    if(remainingTime>0){
     remainingTime=0;
+    timerBlock.style.display='none';
+    }
     //calculate grade
     grade=score/questionsBank.length;
     grade=(grade*100)+'%'

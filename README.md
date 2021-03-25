@@ -62,3 +62,10 @@ You will be able to start the quiz by simply clicking the 'Start Quiz' button on
 • Added timer front end  
 • Added timer back-end functionality  
 • Updated Screenshot
+
+### Sixth Commit
+
+• Add a line that says that every wrong answer deducts 5 seconds from the time.  
+• Reset the choice of the option buttons once you click next question.  
+• When you finish before time is up, it hides the time box.  
+• Added a validation check to ensure that initials are never longer than two characters.
