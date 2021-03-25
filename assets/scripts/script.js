@@ -172,7 +172,6 @@ function saveScores(event){
     scoresTable.style.display='block';
     saveScoreButton.style.display='none';
     resetScoreButton.style.display='block';
-    startOverButton.style.display='block';
 }
 
 // Evaluate Answer to the question
@@ -211,6 +210,7 @@ function gradeMe(){
     /*show score and save score button*/
     document.getElementById('score').style.display='block';
     document.getElementById('save-score').style.display='block';
+    document.getElementById('start-over').style.display='block';
     /*hide other quiz elements*/
     for (let element in document.getElementById('mcq').children){
         if (!(document.getElementById('mcq').children[element].id=='save-score'||document.getElementById('mcq').children[element].id=='score')){
